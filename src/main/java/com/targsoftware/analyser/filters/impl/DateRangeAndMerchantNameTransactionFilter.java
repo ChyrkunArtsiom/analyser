@@ -1,8 +1,8 @@
-package com.targsoftware.analyser.reporters.impl;
+package com.targsoftware.analyser.filters.impl;
 
 import com.targsoftware.analyser.entity.Transaction;
 import com.targsoftware.analyser.entity.TransactionType;
-import com.targsoftware.analyser.reporters.TransactionFilter;
+import com.targsoftware.analyser.filters.TransactionFilter;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -27,14 +27,14 @@ public class DateRangeAndMerchantNameTransactionFilter implements TransactionFil
                 .map(Transaction::getRelatedTransaction).collect(Collectors.toList());
 
         // Filtering a list of non-related transactions in a specific time range and with a specific name
-        transactions = transactions
+        List<Transaction> filtered = transactions
                 .stream()
                 .filter(transaction ->
                         transaction.getDate().isAfter(fromDate)
                                 && transaction.getDate().isBefore(toDate)
-                                && transaction.getMerchantName().equals(merchant)
+                                && transaction.getMerchantName().equalsIgnoreCase(merchant)
                                 && !reversalTransactions.contains(transaction.getId()))
                 .collect(Collectors.toList());
-        return transactions;
+        return filtered;
     }
 }

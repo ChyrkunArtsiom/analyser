@@ -1,4 +1,4 @@
-package com.targsoftware.analyser.reporters;
+package com.targsoftware.analyser.filters;
 
 import com.targsoftware.analyser.entity.Transaction;
 

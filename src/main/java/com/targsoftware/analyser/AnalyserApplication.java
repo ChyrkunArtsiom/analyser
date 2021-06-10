@@ -2,7 +2,7 @@ package com.targsoftware.analyser;
 
 import com.targsoftware.analyser.converters.impl.CSVToTransactionConverter;
 import com.targsoftware.analyser.entity.Transaction;
-import com.targsoftware.analyser.reporters.impl.DateRangeAndMerchantNameTransactionFilter;
+import com.targsoftware.analyser.filters.impl.DateRangeAndMerchantNameTransactionFilter;
 
 import java.util.List;
 import java.util.Scanner;

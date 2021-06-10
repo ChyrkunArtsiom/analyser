@@ -2,6 +2,7 @@ package com.targsoftware.analyser.reporters.impl;
 
 import com.targsoftware.analyser.entity.Transaction;
 import com.targsoftware.analyser.entity.TransactionType;
+import com.targsoftware.analyser.filters.impl.DateRangeAndMerchantNameTransactionFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
