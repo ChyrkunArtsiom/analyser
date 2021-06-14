@@ -21,8 +21,7 @@ public class CSVToTransactionConverter implements TransactionConverter<List<Tran
     @Override
     public List<Transaction> convertToTransactions(String inputParameter) {
         List<Transaction> transactions = new ArrayList<>();
-        try {
-            Reader in = new FileReader(inputParameter);
+        try (Reader in = new FileReader(inputParameter)) {
             Iterable<CSVRecord> records = CSVFormat.DEFAULT
                     .withHeader(HEADERS)
                     .withFirstRecordAsHeader()
@@ -31,7 +30,6 @@ public class CSVToTransactionConverter implements TransactionConverter<List<Tran
             for (CSVRecord record : records) {
                 transactions.add(convertCSVRecordToTransaction(record));
             }
-            in.close();
             return transactions;
         } catch (FileNotFoundException e) {
             throw new IllegalArgumentException(String.format("File at path %s doesn't exist", inputParameter));

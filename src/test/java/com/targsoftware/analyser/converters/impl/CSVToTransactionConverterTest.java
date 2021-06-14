@@ -26,7 +26,9 @@ class CSVToTransactionConverterTest {
 
     @BeforeEach
     void setUp() {
-        try {
+        try (FileWriter out = new FileWriter(FILEPATH);
+             CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT.withHeader(HEADERS))
+        ) {
             transactions = new ArrayList<>();
             DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
             transactions.add(
@@ -45,8 +47,7 @@ class CSVToTransactionConverterTest {
                             "MacLaren",
                             TransactionType.PAYMENT,
                             null));
-            FileWriter out = new FileWriter(FILEPATH);
-            CSVPrinter printer = new CSVPrinter(out, CSVFormat.DEFAULT.withHeader(HEADERS));
+
             transactions.forEach(transaction -> {
                 try {
                     printer.printRecord(
@@ -60,8 +61,6 @@ class CSVToTransactionConverterTest {
                     e.printStackTrace();
                 }
             });
-            printer.close();
-            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

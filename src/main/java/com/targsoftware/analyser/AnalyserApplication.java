@@ -3,6 +3,7 @@ package com.targsoftware.analyser;
 import com.targsoftware.analyser.converters.impl.CSVToTransactionConverter;
 import com.targsoftware.analyser.entity.Transaction;
 import com.targsoftware.analyser.filters.impl.DateRangeAndMerchantNameTransactionFilter;
+import lombok.Cleanup;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,7 +13,7 @@ public class AnalyserApplication {
         String filename = "data.csv";
         CSVToTransactionConverter converter = new CSVToTransactionConverter();
         DateRangeAndMerchantNameTransactionFilter reporter = new DateRangeAndMerchantNameTransactionFilter();
-        Scanner scanner = new Scanner(System.in);
+        @Cleanup Scanner scanner = new Scanner(System.in);
         System.out.print("fromDate:");
         String fromDate = scanner.nextLine();
         System.out.print("toDate:");
